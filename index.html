@@ -329,7 +329,7 @@
     }
 
 body.results-bg {
-  background-image: url('assets/results-bg.jpg');
+  background-image: url('Assets/results-bg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -531,7 +531,7 @@ font-size: 1.5rem;               /* Bigger brand name */
 <div class="question-background"></div>
   <div class="container">
     <div class="start-screen active" id="start-screen">
-      <img src="assets/intro-placeholder.png" alt="Intro Image" />
+      <img src="Assets/intro-placeholder.png" alt="Intro Image" />
       <h1>Find Your Perfect Sheep Tag Match!</h1>
       <p>Answer 5 quick questions to discover which brand suits you best.</p>
       <button id="start-button">Start Quiz</button>
@@ -554,8 +554,8 @@ font-size: 1.5rem;               /* Bigger brand name */
     </div>
   </div>
 
-<audio id="answer-sound" src="assets/answersound.wav" preload="auto"></audio>
-<audio id="reveal-sound" src="assets/reveal.wav" preload="auto"></audio>
+<audio id="answer-sound" src="Assets/answersound.wav" preload="auto"></audio>
+<audio id="reveal-sound" src="Assets/reveal.wav" preload="auto"></audio>
 
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
@@ -630,11 +630,11 @@ font-size: 1.5rem;               /* Bigger brand name */
 
 // Define an array of background images for each question (make sure to put your real image paths here)
 const questionBackgrounds = [
-  'assets/bg-question1.jpg',
-  'assets/bg-question2.jpg',
-  'assets/bg-question3.jpg',
-  'assets/bg-question4.jpg',
-  'assets/bg-question5.jpg'
+  'Assets/bg-question1.jpg',
+  'Assets/bg-question2.jpg',
+  'Assets/bg-question3.jpg',
+  'Assets/bg-question4.jpg',
+  'Assets/bg-question5.jpg'
 ];
 
 const bgDiv = document.querySelector('.question-background');
@@ -733,7 +733,7 @@ const resultHTML = orderedBrands.map(b => {
 
   return `
     <div class="brand ${isWinner ? 'brand-highlight' : ''}">
-      <img src="assets/${b.toLowerCase()}-logo.png" alt="${b} Logo" />
+      <img src="Assets/${b.toLowerCase()}-logo.png" alt="${b} Logo" />
       <div class="brand-name-wrapper">
         ${isWinner ? '<span class="winner-badge-inline">Your Match!</span>' : ''}
         <h3>${b}</h3>
