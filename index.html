@@ -733,7 +733,20 @@ function finishQuiz() {
   document.body.classList.remove('start-bg', 'question-bg'); // Remove other background classes if you use them
   document.body.classList.add('results-bg');
 
-  const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+// Get sorted scores
+const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+
+// Check for tie
+const topScore = sortedScores[0][1];
+const topBrands = sortedScores.filter(([_, score]) => score === topScore).map(([brand]) => brand);
+
+// If tie and Rubba is one of them, remove Rubba
+let winner;
+if (topBrands.length > 1 && topBrands.includes("Rubba")) {
+  winner = topBrands.find(b => b !== "Rubba") || "Rubba"; // Fallback to Rubba if needed
+} else {
+  winner = sortedScores[0][0];
+}
 
 const brands = ['Rubba', 'TagFaster', 'Z Tags'];
 
