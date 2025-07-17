@@ -561,14 +561,21 @@ font-size: 1.5rem;               /* Bigger brand name */
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
     const questions = [
-      {
-        text: "How important is the applicator to your tagging process?",
-        answers: [
-          { brand: "Rubba", text: "I'm happy using a standard manual applicator – simple and reliable." },
-          { brand: "TagFaster", text: "I’m interested in using an automatic applicator to make tagging quicker and easier." },
-          { brand: "Z Tags", text: "I want a smooth, stress-free application and to avoid damage to the ear." }
-        ]
-      },
+     {
+  text: "How important is the applicator to your tagging process?",
+  answers: [
+    {
+      brand: "Rubba",
+      text: "I'm happy using a standard manual applicator – simple and reliable.",
+      specialScoring: ["Rubba", "Z Tags", "TagFaster"]
+    },
+    {
+      brand: "TagFaster",
+      text: "I’m interested in using an automatic applicator to make tagging quicker and easier.",
+      specialScoring: ["TagFaster", "TagFaster"]
+    }
+  ]
+},
       {
         text: "Do tag shape and size matter to you?",
         answers: [
@@ -681,14 +688,25 @@ function fadeBackgroundTo(imageUrl) {
 }
 
 function selectAnswer(brand, answerText) {
+  const q = questions[currentQuestion];
+  const selectedAnswer = q.answers.find(a => a.text === answerText);
+
+  // Special scoring logic (only applies if specialScoring array is defined)
+  if (selectedAnswer && selectedAnswer.specialScoring) {
+    selectedAnswer.specialScoring.forEach(b => {
+      scores[b]++;
+    });
+  } else {
+    scores[brand]++;
+  }
+
   // Play answer sound
   const answerSound = document.getElementById('answer-sound');
   if (answerSound) {
-    answerSound.currentTime = 0; // rewind to start
+    answerSound.currentTime = 0;
     answerSound.play();
   }
 
-  scores[brand]++;
   answersSelected.push(answerText);
   currentQuestion++;
   if (currentQuestion < questions.length) {
@@ -697,6 +715,7 @@ function selectAnswer(brand, answerText) {
     finishQuiz();
   }
 }
+
 
 function finishQuiz() {
   // Play reveal sound
